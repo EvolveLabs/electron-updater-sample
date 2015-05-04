@@ -1,6 +1,6 @@
 {
   "name": "electron-updater-sample",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "main.js",
   "devDependencies": {
     "electron-prebuilt": "^0.25.1",

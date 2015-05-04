@@ -1,0 +1,13 @@
+{
+  "name": "electron-updater-sample",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "electron-prebuilt": "^0.25.1",
+    "gulp": "^3.8.11"
+  },
+  "dependencies": {
+  	"electron-updater": "^1.0.0",
+    "paktc": "^1.0.0"
+  }
+}

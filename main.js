@@ -2,8 +2,8 @@
 /* global process */
 var app = require('app'),  // Module to control application life.
     util = require('util'),
-    BrowserWindow = require('browser-window'),  // Module to create native browser window.
-    updater = require('electron-updater')
+    BrowserWindow = require('browser-window')  // Module to create native browser window.
+    
 
 
 console.log('starting...')
@@ -24,6 +24,8 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
+    var updater = require('electron-updater')
+    
     console.log('app ready...')
     updater.on('ready', function () {
         

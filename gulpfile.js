@@ -1,29 +1,40 @@
 var gulp = require('gulp'),
 	path = require('path')
 
-var files = [
-    'package.json',
-    'main.js',
-    'index.html',
-	path.join('node_modules', 'electron-updater', '**', '*')
-]
-
 var electronDir = path.dirname(require('electron-prebuilt'))
 var electronFiles = [
 	path.join(electronDir, '**', '*')
 ]
+var updaterFiles = [
+	path.join('node_modules', 'electron-updater', '**', '*')
+]
+var appFiles = [
+    'package.json',
+    '*.js',
+    'index.html'
+]
+
+var releaseDir = 'release' // 'C:\\Users\\justin\\Desktop\\temp\\release'
+var releaseAppDir = path.join(releaseDir, 'resources', 'app')
+var releaseUpdaterDir = path.join(releaseAppDir, 'node_modules', 'electron-updater')
 
 gulp.task('copy-electron', function () {
 	return gulp
 		.src(electronFiles)
-		.pipe(gulp.dest('release'))
+		.pipe(gulp.dest(releaseDir))
+})
+
+gulp.task('copy-electron-updater', function () {
+	return gulp
+		.src(updaterFiles)
+		.pipe(gulp.dest(releaseUpdaterDir))
 })
 
 gulp.task('copy-app', function () {
 	return gulp
-		.src(files)
-		.pipe(gulp.dest(path.join('release', 'resources', 'app')))
+		.src(appFiles)
+		.pipe(gulp.dest(releaseAppDir))
 })
  
-gulp.task('release', ['copy-app', 'copy-electron'])
+gulp.task('release', ['copy-app', 'copy-electron-updater', 'copy-electron'])
 gulp.task('default', ['release'])

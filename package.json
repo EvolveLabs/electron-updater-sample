@@ -16,6 +16,6 @@
     "electron-plugins": "^1.0.0"
   },
   "plugins": {
-    "electron-updater-sample-plugin": "^0.0.1"
+    "electron-updater-sample-plugin": "^0.0.2"
   }
 }

@@ -1,60 +1,59 @@
-/* global __dirname */
-/* global process */
-var app = require('app'),  // Module to control application life.
+var app = require('app'),
+    ipc = require('ipc'),
     util = require('util'),
-    BrowserWindow = require('browser-window')  // Module to create native browser window.
-    
-
-
-console.log('starting...')
+    BrowserWindow = require('browser-window'),
+    updater = require('electron-updater')
   
-// Report crashes to our server.
-require('crash-reporter').start();
+require('crash-reporter').start()
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the javascript object is GCed.
-var mainWindow = null;
+var mainWindow = null, 
+    loaded = false
 
-// Quit when all windows are closed.
 app.on('window-all-closed', function() {
     if (process.platform != 'darwin')
-        app.quit();
-});
+        app.quit()
+})
 
-// This method will be called when Electron has done everything
-// initialization and ready for creating browser windows.
 app.on('ready', function() {
-    var updater = require('electron-updater')
-    
-    console.log('app ready...')
-    updater.on('ready', function () {
-        
-        // The app is launched if required dependencies are available
-        console.log('Updater is ready!')
+    // Instead of launching your window right away, start the updater
+    // to check to see if the app is valid or not.
+    // An app is invalid if any of its dependencies or plugins are missing.
+    // In this case the updater will begin a 'full' update. Once updated
+    // your app will be re-launched.
 
-        // Create the browser window.
-        mainWindow = new BrowserWindow({width: 800, height: 600});
-        
-        // and load the index.html of the app.
-        mainWindow.loadUrl('file://' + __dirname + '/index.html');
-        mainWindow.openDevTools({detach:true})
-        
-        // Emitted when the window is closed.
+    updater.on('ready', function () {        
+        // This event is called if your app is currently valid.
+        // It may be out-of-date but it has all of the necessary
+        // dependencies and plugins to launch right now.
+        // Your app maybe also receive an update-available event following this
+
+        mainWindow = new BrowserWindow({width: 800, height: 600})
+        mainWindow.loadUrl('file://' + __dirname + '/index.html')
+        mainWindow.openDevTools({detach:true})        
         mainWindow.on('closed', function() {
-            // Dereference the window object, usually you would store windows
-            // in an array if your app supports multi windows, this is the time
-            // when you should delete the corresponding element.
             mainWindow = null;
         });
     })
-    updater.on('updateAvailable', function () {
-        // notify user of available update, a restart required to apply them
-        console.log('An update is available upon restart.')
-    })
     updater.on('updateRequired', function () {
-        // Necessary dependencies are missing or are being updated, close immediately
-        console.log('Closing to apply updates...')
+        // This event is fired if your app is not currently valid at startup.
+        // The app must be exited immediately and the auto-updater will be run instead.
+        // After the auto-update runs the app will be re-run.
+        
         app.quit();
     })
+    updater.on('updateAvailable', function () {
+        // This event is fired after new versions of plugins have been downloaded and
+        // before the app and dependencies are downloaded. Plugins are installed side-by-side
+        // so they can be downloaded while the app is running.
+        
+        // After the app is restarted it will watch for updates and fire the updated required
+        // event when newer versions are available.
+
+        if(mainWindow) {
+            // Send a message to your view(s)
+            mainWindow.webContents.send('update-available');
+        }
+    })
+
     updater.start()
-});
+})

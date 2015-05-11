@@ -13,7 +13,7 @@
   },
   "dependencies": {
   	"electron-updater": "^1.0.0",
-    "paktc": "^1.0.0"
+    "electron-plugins": "^1.0.0"
   },
   "plugins": {
     "electron-updater-sample-plugin": "^0.0.1"

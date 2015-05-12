@@ -14,7 +14,7 @@ var appFiles = [
     'index.html'
 ]
 
-var releaseDir = 'release' // 'C:\\Users\\justin\\Desktop\\temp\\release'
+var releaseDir = 'release'
 var releaseAppDir = path.join(releaseDir, 'resources', 'app')
 var releaseUpdaterDir = path.join(releaseAppDir, 'node_modules', 'electron-updater')
 

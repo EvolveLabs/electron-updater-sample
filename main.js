@@ -32,7 +32,7 @@ app.on('ready', function() {
         mainWindow.openDevTools({detach:true})        
         mainWindow.on('closed', function() {
             mainWindow = null;
-        });
+        })
     })
     updater.on('updateRequired', function () {
         // This event is fired if your app is not currently valid at startup.

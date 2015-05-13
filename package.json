@@ -12,8 +12,8 @@
     "gulp": "^3.8.11"
   },
   "dependencies": {
-  	"electron-updater": "^1.0.0",
-    "electron-plugins": "^1.0.0"
+  	"electron-updater": "^0.0.1",
+    "electron-plugins": "^0.0.1"
   },
   "plugins": {
     "electron-updater-sample-plugin": "^0.0.2"

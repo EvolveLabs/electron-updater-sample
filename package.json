@@ -7,9 +7,16 @@
     "type": "git",
     "url": "git://github.com/evolvelabs/electron-updater-sample.git"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "devDependencies": {
     "electron-prebuilt": "^0.25.1",
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4",
+    "proxyquire": "^1.4.0",
+    "sinon": "^1.14.1"
   },
   "dependencies": {
   	"electron-updater": "^0.0.1",

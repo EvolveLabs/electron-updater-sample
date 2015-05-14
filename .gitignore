@@ -4,3 +4,4 @@ release
 
 #files
 *.tgz
+*.log

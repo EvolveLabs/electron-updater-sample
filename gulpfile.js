@@ -15,14 +15,8 @@ var appFiles = [
 ]
 
 var releaseDir = 'release'
-var releaseAppDir = path.join(releaseDir, 'resources', 'app')
+var releaseAppDir = path.join(releaseDir, 'app')
 var releaseUpdaterDir = path.join(releaseAppDir, 'node_modules', 'electron-updater')
-
-gulp.task('copy-electron', function () {
-	return gulp
-		.src(electronFiles)
-		.pipe(gulp.dest(releaseDir))
-})
 
 gulp.task('copy-electron-updater', function () {
 	return gulp
@@ -36,5 +30,5 @@ gulp.task('copy-app', function () {
 		.pipe(gulp.dest(releaseAppDir))
 })
  
-gulp.task('release', ['copy-app', 'copy-electron-updater', 'copy-electron'])
+gulp.task('release', ['copy-app', 'copy-electron-updater'])
 gulp.task('default', ['release'])

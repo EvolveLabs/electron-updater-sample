@@ -1,0 +1,16 @@
+{
+  "macos" : {
+    "title": "electron-updater-sample",
+    "background": "assets/macos/installer.png",
+    "icon": "assets/macos/mount.icns",
+    "icon-size": 80,
+    "contents": [
+      { "x": 438, "y": 344, "type": "link", "path": "/Applications" },
+      { "x": 192, "y": 344, "type": "file" }
+    ]
+  },
+  "win" : {
+    "title" : "electron-updater-sample",
+    "icon" : "assets/win/evolve.ico"
+  }
+}

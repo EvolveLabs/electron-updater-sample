@@ -13,14 +13,17 @@
     "clean": "rm -rf ./release",
     "gulp": "npm run clean && gulp",
 
-    "pack": "npm run gulp && npm run pack:win",
+    "pack": "npm run gulp && npm run pack:win && npm run pack:darwin",
     "pack:win": "electron-packager ./release/app electron-updater-sample --platform=win32 --arch=x64 --version=0.27.2 --out=./release/win32 --icon=assets/win/evolve.ico",
+    "pack:darwin": "electron-packager ./release/app electron-updater-sample --platform=darwin --arch=x64 --version=0.27.2 --out=./release/darwin --icon=assets/win/evolve.ico",
 
-    "build": "npm run pack && npm run build:win",
+    "build": "npm run pack && npm run build:win && npm run build:darwin",
     "build:win": "electron-builder ./release/win32/electron-updater-sample-win32 --platform=win32 --config=config.json --out=./release/win32",
+    "build:darwin": "electron-builder ./release/darwin/electron-updater-sample.app --platform=darwin --config=config.json --out=./release/darwin",
 
-    "release": "npm run build && npm run release:win",
-    "release:win": "mv './release/win32/electron-updater-sample Setup.exe' './release/win32/Setup-x64.exe'"
+    "release": "npm run build && npm run release:win && npm run release:darwin",
+    "release:win": "mv './release/win32/electron-updater-sample Setup.exe' './release/win32/Setup-x64.exe'",
+    "release:darwin": "mv ./release/darwin/electron-updater-sample.dmg ./release/darwin/electron-updater-sample-x64.dmg"
   },
   "devDependencies": {
     "chai": "^2.3.0",
